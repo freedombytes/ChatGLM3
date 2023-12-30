@@ -1,6 +1,6 @@
 import os
 
-from flask import jsonify, Flask
+from flask import jsonify, request, Flask
 from transformers import AutoTokenizer, AutoModel
 
 app = Flask(__name__)
@@ -31,8 +31,9 @@ def process(query):
             current_length = len(response)
     return res
 
-@app.route('/ask/<string:query>', methods=['GET'])
-def do_ask(query):
+@app.route('/ask', methods=['GET'])
+def do_ask():
+    query = request.args.get('query', default='', type=str)
     return jsonify({'code': 200, 'ask': query, 'answer': process(query)})
 
 if __name__ == "__main__":
