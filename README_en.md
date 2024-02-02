@@ -10,9 +10,28 @@
 📍Experience the larger-scale ChatGLM model at <a href="https://www.chatglm.cn">chatglm.cn</a>
 </p>
 
-## Introduction
+📔
+About `ChatGLM3-6B`
+For more detailed usage information, please refer to: 
++ [ChatGLM3 technical documentation](https://lslfd0slxc.feishu.cn/wiki/WvQbwIJ9tiPAxGk8ywDck6yfnof?from=from_copylink)
++ [Bilibili video](https://www.bilibili.com/video/BV1uC4y1J7yA)
++ [YouTube video](https://www.youtube.com/watch?v=Pw9PB6R7ORA)
 
-ChatGLM3 is a new generation of pre-trained dialogue models jointly released by Zhipu AI and Tsinghua KEG. ChatGLM3-6B is the open-source model in the ChatGLM3 series, maintaining many excellent features of the first two generations such as smooth dialogue and low deployment threshold, while introducing the following features:
+## GLM-4 Introduction
+
+We have released the latest **GLM-4** model, which has made new breakthroughs in multiple indicators. You can directly experience our latest model in the following two channels.
+
++ [Chatglm Qingyan](https://www.chatglm.cn) To experience the latest version of GLM-4, including **GLM, all tools** and other functions, download the Zhipu Qingyan APP
+  Or use [web page](https://www.chatglm.cn).
++ [API Platform](https://open.bigmodel.cn/) The new generation API platform has been launched. You can directly access the API
+  Experience new models such as `GLM-4`, `GLM-3-Turbo`, `CharGLM-3`, and `CogView-3` on the platform.
+  Among them, two models, `GLM-4` and `GLM-3-Turbo`, support new functions such as `system prompt`, `function call`, `retrieval`, `Web_Search`, etc. Welcome to experience it.
+
+-----
+
+## ChatGLM3 Introduction
+
+**ChatGLM3** is a generation of pre-trained dialogue models jointly released by Zhipu AI and Tsinghua KEG. ChatGLM3-6B is the open-source model in the ChatGLM3 series, maintaining many excellent features of the first two generations such as smooth dialogue and low deployment threshold, while introducing the following features:
 
 1. **Stronger Base Model:** The base model of ChatGLM3-6B, ChatGLM3-6B-Base, adopts a more diverse training dataset, more sufficient training steps, and a more reasonable training strategy. Evaluations on datasets from various perspectives such as semantics, mathematics, reasoning, code, and knowledge show that **ChatGLM3-6B-Base has the strongest performance among base models below 10B**.
 
@@ -86,10 +105,7 @@ Then use pip to install the dependencies:
 ```
 pip install -r requirements.txt
 ```
-+ The `transformers` library version should be `4.30.2` and above, and `torch` library should be 2.0 and above to obtain the best inference performance.
 + In order to ensure that the version of `torch` is correct, please strictly follow the instructions of [official documentation](https://pytorch.org/get-started/locally/) for installation.
-+ The `gradio` library version should be the `3.x` version.
-
 
 ### Integrated Demo
 
@@ -139,8 +155,8 @@ git clone https://huggingface.co/THUDM/chatglm3-6b
 If the download from HuggingFace is slow, you can also download it from [ModelScope](https://modelscope.cn/models/ZhipuAI/chatglm3-6b).
 
 # Model Fine-tuning
-Please refer to the dialog model fine-tuning [ChatGLM3-6B fine-tuning example](finetune_chatmodel_demo/README.md), or the base model fine-tuning [ChatGLM3-6B-base fine-tuning example](finetune_basemodel_demo/README.md).
-Please note that different fine-tuning scripts correspond to different models. Please select the corresponding model according to your needs.
+
+We provide a basic fine-tuning framework for ChatGLM3-6B. You can use it to fine-tune the model on your own dataset. For more details, please refer to [Fine-tuning Demo](finetune_demo/README_en.md).
 
 ### Web-based Dialogue Demo
 ![web-demo](resources/web-demo.gif)
@@ -170,13 +186,19 @@ python cli_demo.py
 
 The program will interact in the command line, enter instructions in the command line and hit enter to generate a response. Enter `clear` to clear the dialogue history, enter `stop` to terminate the program.
 
-### OpenAI API Demo
-Thanks to [@xusenlinzy](https://github.com/xusenlinzy) for implementing the OpenAI format streaming API deployment, which can serve as the backend for any ChatGPT-based application, such as [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web). You can deploy it by running [openai_api.py](openai_api_demo/openai_api.py) in the repository:
+### OpenAI API /Zhipu API Demo 
+We have launched open source model API deployment code in OpenAI / ZhipuAI format, which can be used as the backend of any ChatGPT-based application.
+Currently, you can deploy by running [api_server.py](openai_api_demo/api_server.py) in the warehouse
+
 ```shell
 cd openai_api_demo
-python openai_api.py
+python api_server.py
 ```
-Also, we have written a sample code to test the performance of the API calls. This can be tested by running [openai_api_request.py](openai_api_demo/openai_api_request.py) in the repository
+
+At the same time, we also wrote a sample code to test the performance of API calls.
+
++ OpenAI test script: [openai_api_request.py](openai_api_demo/openai_api_request.py)
++ ZhipuAI test script: [zhipu_api_request.py](openai_api_demo/zhipu_api_request.py)
 + Test with Curl
 ```shell
 curl -X POST "http://127.0.0.1:8000/v1/chat/completions" \

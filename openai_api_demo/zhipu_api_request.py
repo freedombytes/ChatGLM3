@@ -1,19 +1,21 @@
 """
-This script is an example of using the OpenAI API to create various interactions with a ChatGLM3 model.
-It includes functions to:
+This script is an example of using the Zhipu API to create various interactions with a ChatGLM3 model. It includes
+functions to:
 
 1. Conduct a basic chat session, asking about weather conditions in multiple cities.
 2. Initiate a simple chat in Chinese, asking the model to tell a short story.
 3. Retrieve and print embeddings for a given text input.
+Each function demonstrates a different aspect of the API's capabilities,
+showcasing how to make requests and handle responses.
 
-Each function demonstrates a different aspect of the API's capabilities, showcasing how to make requests
-and handle responses.
+Note: Make sure your Zhipu API key is set as an environment
+variable formate as xxx.xxx (just for check, not need a real key).
 """
 
-from openai import OpenAI
+from zhipuai import ZhipuAI
 
 base_url = "http://127.0.0.1:8000/v1/"
-client = OpenAI(api_key="EMPTY", base_url=base_url)
+client = ZhipuAI(api_key="EMP.TY", base_url=base_url)
 
 
 def function_chat():
@@ -40,7 +42,7 @@ def function_chat():
     ]
 
     response = client.chat.completions.create(
-        model="chatglm3-6b",
+        model="chatglm3_6b",
         messages=messages,
         tools=tools,
         tool_choice="auto",
@@ -56,21 +58,20 @@ def simple_chat(use_stream=True):
     messages = [
         {
             "role": "system",
-            "content": "You are ChatGLM3, a large language model trained by Zhipu.AI. Follow the user's "
-                       "instructions carefully. Respond using markdown.",
+            "content": "You are ChatGLM3, a large language model trained by Zhipu.AI. Follow "
+                       "the user's instructions carefully. Respond using markdown.",
         },
         {
             "role": "user",
-            "content": "你好，请你用生动的话语给我讲一个小故事吧"
+            "content": "你好，请你介绍一下chatglm3-6b这个模型"
         }
     ]
     response = client.chat.completions.create(
-        model="chatglm3-6b",
+        model="chatglm3_",
         messages=messages,
         stream=use_stream,
         max_tokens=256,
         temperature=0.8,
-        presence_penalty=1.1,
         top_p=0.8)
     if response:
         if use_stream:
@@ -86,7 +87,7 @@ def simple_chat(use_stream=True):
 def embedding():
     response = client.embeddings.create(
         model="bge-large-zh-1.5",
-        input=["你好，给我讲一个故事，大概100字"],
+        input=["ChatGLM3-6B 是一个大型的中英双语模型。"],
     )
     embeddings = response.data[0].embedding
     print("嵌入完成，维度：", len(embeddings))

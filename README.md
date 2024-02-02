@@ -12,13 +12,27 @@
 
 [Read this in English.](./README_en.md)
 
-📔
-更为详细的使用信息，可以参考：[ChatGLM3技术文档](https://lslfd0slxc.feishu.cn/wiki/WvQbwIJ9tiPAxGk8ywDck6yfnof?from=from_copylink)
-或 [B站视频](https://www.bilibili.com/video/BV1uC4y1J7yA)、[YouTube视频](https://www.youtube.com/watch?v=Pw9PB6R7ORA)
+📔 关于`ChatGLM3-6B`
+更为详细的使用信息，可以参考
++ [ChatGLM3 开放技术文档](https://lslfd0slxc.feishu.cn/wiki/WvQbwIJ9tiPAxGk8ywDck6yfnof?from=from_copylink)
++ [Bilibili video](https://www.bilibili.com/video/BV1uC4y1J7yA)
++ [YouTube video](https://www.youtube.com/watch?v=Pw9PB6R7ORA)
 
-## 介绍
+## GLM-4 介绍
 
-ChatGLM3 是智谱AI和清华大学 KEG 实验室联合发布的新一代对话预训练模型。ChatGLM3-6B 是 ChatGLM3
+我们已经发布最新的 **GLM-4** 模型，该模型在多个指标上有了新的突破，您可以在以下两个渠道体验我们的最新模型。
+
++ [智谱清言](https://www.chatglm.cn) 体验最新版 GLM-4，包括 **GLMs，All tools**等功能，下载 智谱清言 APP
+  或者使用 [网页端](https://www.chatglm.cn)。
++ [API平台](https://open.bigmodel.cn/) 新一代 API 平台已经上线，您可以直接在 API
+  平台上体验 `GLM-4`、`GLM-3-Turbo`、`CharGLM-3`，`CogView-3` 等新模型。
+  其中`GLM-4`、`GLM-3-Turbo`两个模型支持了 `System Prompt`、`Function Call`、 `Retrieval`、`Web_Search`等新功能，欢迎体验。
+
+-----
+
+## ChatGLM3 介绍
+
+**ChatGLM3** 是智谱AI和清华大学 KEG 实验室联合发布的对话预训练模型。ChatGLM3-6B 是 ChatGLM3
 系列中的开源模型，在保留了前两代模型对话流畅、部署门槛低等众多优秀特性的基础上，ChatGLM3-6B 引入了如下特性：
 
 1. **更强大的基础模型：** ChatGLM3-6B 的基础模型 ChatGLM3-6B-Base
@@ -120,17 +134,15 @@ pip install -r requirements.txt
 
 + 为了保证 `torch` 的版本正确，请严格按照 [官方文档](https://pytorch.org/get-started/locally/) 的说明安装。
 
-
 ### 综合 Demo
 
 我们提供了一个集成以下三种功能的综合 Demo，运行方法请参考[综合 Demo](composite_demo/README.md)
-
 
 - Chat: 对话模式，在此模式下可以与模型进行对话。
 - Tool: 工具模式，模型除了对话外，还可以通过工具进行其他操作。
 
 <img src="resources/tool.png" width="400">
-  
+
 - Code Interpreter: 代码解释器模式，模型可以在一个 Jupyter 环境中执行代码并获取结果，以完成复杂任务。
 
 <img src="resources/heart.png" width="400">
@@ -182,9 +194,8 @@ git clone https://huggingface.co/THUDM/chatglm3-6b
 
 ### 模型微调
 
-请参考对话模型微调 [ChatGLM3-6B 微调示例](finetune_chatmodel_demo/README.md)
-,或基座模型微调 [ChatGLM3-6B-base 微调示例](finetune_basemodel_demo/README.md)。
-请注意，不同的微调脚本对应的模型并不相同，请根据需要选择对应的模型。
+我们提供了一个微调 ChatGLM3-6B 模型的基础套件，可以用来微调 ChatGLM3-6B 模型。微调套件的使用方法请参考
+[微调套件](finetune_demo/README.md)。
 
 ### 网页版对话 Demo
 
@@ -225,20 +236,20 @@ python cli_demo.py
 
 关于工具调用的方法请参考 [工具调用](tools_using_demo/README.md)。
 
-#### OpenAI API Demo
+#### OpenAI API / Zhipu API Demo
 
-感谢 [@xusenlinzy](https://github.com/xusenlinzy) 实现了 OpenAI 格式的流式 API 部署，可以作为任意基于 ChatGPT
-的应用的后端，比如 [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web)
-。可以通过运行仓库中的[openai_api.py](openai_api_demo/openai_api.py) 进行部署：
+我们已经推出了 OpenAI / ZhipuAI 格式的 开源模型 API 部署代码，可以作为任意基于 ChatGPT 的应用的后端。
+目前，可以通过运行仓库中的 [api_server.py](openai_api_demo/api_server.py) 进行部署
 
 ```shell
 cd openai_api_demo
-python openai_api.py
+python api_server.py
 ```
 
-同时，我们也书写了一个示例代码，用来测试API调用的性能。可以通过运行仓库中的[openai_api_request.py](openai_api_demo/openai_api_request.py)
-进行测试
+同时，我们也书写了一个示例代码，用来测试API调用的性能。
 
++ OpenAI 测试脚本：[openai_api_request.py](openai_api_demo/openai_api_request.py)
++ ZhipuAI 测试脚本：[zhipu_api_request.py](openai_api_demo/zhipu_api_request.py)
 + 使用Curl进行测试
 
 ```shell
