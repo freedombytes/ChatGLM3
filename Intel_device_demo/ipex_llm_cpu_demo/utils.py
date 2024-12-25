@@ -26,6 +26,7 @@ def process_response(output: str, use_tool: bool = False) -> Union[str, dict]:
         else:
             if use_tool:
                 content = "\n".join(content.split("\n")[1:-1])
+
                 def tool_call(**kwargs):
                     return kwargs
 
@@ -64,7 +65,6 @@ def generate_stream_chatglm3(model: PreTrainedModel, tokenizer: PreTrainedTokeni
     eos_token_id = [
         tokenizer.eos_token_id,
         tokenizer.get_command("<|user|>"),
-        tokenizer.get_command("<|observation|>")
     ]
 
     gen_kwargs = {
@@ -122,7 +122,6 @@ def generate_stream_chatglm3(model: PreTrainedModel, tokenizer: PreTrainedTokeni
 def process_chatglm_messages(messages, tools=None):
     _messages = messages
     messages = []
-    msg_has_sys = False
     if tools:
         messages.append(
             {
@@ -131,7 +130,6 @@ def process_chatglm_messages(messages, tools=None):
                 "tools": tools
             }
         )
-        msg_has_sys = True
 
     for m in _messages:
         role, content, func_call = m.role, m.content, m.function_call
@@ -154,9 +152,6 @@ def process_chatglm_messages(messages, tools=None):
                     }
                 )
         else:
-            if role == "system" and msg_has_sys:
-                msg_has_sys = False
-                continue
             messages.append({"role": role, "content": content})
     return messages
 

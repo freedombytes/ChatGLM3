@@ -26,7 +26,7 @@ pip install -r requirements.txt
 > 1. 未知的训练问题 / 显存占用与上述有误差。
 > 2. 架构过低而不支持某些特性。
 > 3. 推理效果问题。
-     > 以上三种情况为社区曾经遇到过的问题，虽然概率极地，如果您遇到了以上问题，可以尝试在社区中解决。
+     > 以上三种情况为社区曾经遇到过的问题，虽然概率较低，如果您遇到了以上问题，可以尝试在社区中解决。
 
 ## 多轮对话格式
 
@@ -191,7 +191,7 @@ pip install -r requirements.txt
 
 ```angular2html
 cd finetune_demo
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/chatglm3-6b  configs/lora.yaml configs/ds_zero_2.json
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/chatglm3-6b  configs/lora.yaml
 ```
 
 通过以下代码执行 **单机单卡** 运行。
